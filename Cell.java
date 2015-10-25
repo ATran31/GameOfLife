@@ -6,10 +6,8 @@ public class Cell{
     // constructors
     public Cell(){}
 
-    public Cell(boolean living, int xPos, int yPos){
+    public Cell(boolean living){
         isAlive = living;
-        position[0] = xPos-1;
-        position[1] = yPos-1;
     }
     // methods
     void live(){
@@ -20,11 +18,6 @@ public class Cell{
     void die(){
         // sets current cell to dead
         isAlive = false;
-    }
-
-    void setPosition(int newXPos, int newYPos){
-        position[0] = newXPos-1;
-        position[1] = newYPos-1;
     }
 
     public int [] getPosition(){
