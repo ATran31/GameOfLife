@@ -10,7 +10,7 @@ public class Life{
         // init game board
         Cell [][] board = game.makeBoard(10, 10);
         
-        // insert glider
+        // insert glider at position (2, 2)
         game.insertGlider(board, 2, 2);
         
         // print game board
@@ -22,7 +22,7 @@ public class Life{
             System.out.println("Generation: "+i+"/"+gameIterations);
             game.evaluateBoard(board);
             game.printBoard(board);
-            game.delayGame();
+            game.delayGame(game.getDelay());
         }
     }
 }
