@@ -20,13 +20,14 @@ public class GameControl{
 
         for (int row = 0; row < board.length; row++){
             for (int col = 0; col < board[row].length; col++){
-                board[row][col] = new Cell().setPosition(row, col);
+                board[row][col] = new Cell();
+                board[row][col].setPosition(col, row);
             }
         }
         return board;
     }
 
-    public void insertGlider(Cell [][] destBoard, int xPos, int yPos){
+    void insertGlider(Cell [][] destBoard, int xPos, int yPos){
         // init glider pattern and inserts it into game board at (xPos, yPos)
         String [][] pattern = {{" ", "*", " "}, {" ", " ", "*"}, {"*","*","*"}}; // " " is dead, "*" is living
 
@@ -44,7 +45,7 @@ public class GameControl{
         }
     }
 
-    public void printBoard(Cell [][] gameBoard){
+    void printBoard(Cell [][] gameBoard){
         // prints the entire gameboard for a single generation
         for (int row = 0; row < gameBoard.length; row++){
             for (int col = 0; col < gameBoard[row].length; col++){
@@ -59,7 +60,7 @@ public class GameControl{
         }
     }
 
-    public void setMaxGenerations(int numGenerations){
+    void setMaxGenerations(int numGenerations){
         // set the max number of generations to run the game
         generations = numGenerations;
     }
@@ -69,7 +70,7 @@ public class GameControl{
         return generations;
     }
 
-    public void setDelay(int newDelay){
+    void setDelay(int newDelay){
         // set the delay between each generation in miliseconds
         delayTime = newDelay;
     }
@@ -79,7 +80,7 @@ public class GameControl{
         return delayTime;
     }
 
-    public void delayGame(int delayFor){
+    void delayGame(int delayFor){
         try{
             Thread.sleep(delayFor);
         } catch (InterruptedException e) {
@@ -87,7 +88,7 @@ public class GameControl{
         }
     }
 
-    public void evaluateBoard(Cell [][] currentBoard){
+    void evaluateBoard(Cell [][] currentBoard){
         // make new empty board to store the status of next board
         Cell [][] nextBoard = new Cell [currentBoard.length][currentBoard[0].length];
         
