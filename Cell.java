@@ -10,18 +10,23 @@ public class Cell{
         isAlive = living;
     }
     // methods
-    void live(){
+    public void live(){
         // sets current cell to live
         isAlive = true;
     }
 
-    void die(){
+    public void die(){
         // sets current cell to dead
         isAlive = false;
     }
 
     public int [] getPosition(){
         return position;
+    }
+
+    public void setPosition(int rowPos, int colPos){
+        position[0] = rowPos;
+        position[1] = colPos;
     }
 
     public boolean hasLife(){
