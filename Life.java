@@ -18,7 +18,7 @@ public class Life{
 
         int gameIterations = game.getMaxGenerations();
 
-        for(int i = 1; i < gameIterations; i++){
+        for(int i = 1; i <= gameIterations; i++){
             System.out.println("Generation: "+i+"/"+gameIterations);
             game.evaluateBoard(board);
             game.printBoard(board);
