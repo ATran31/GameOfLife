@@ -3,11 +3,15 @@ import java.awt.GridLayout;
 
 public class GameControl{
     // default states of any new game
-    private int generations = 0;
-    private int delayTime = 0;
+    private int generations = 1;
+    private int delayTime = 1000; // default delay is 1 second
 
     // constructors
     public GameControl(){}
+
+    public GameControl(int numGenerations){
+        generations = numGenerations;
+    }
 
     public GameControl(int numGenerations, int newDelay){
         generations = numGenerations;
@@ -31,6 +35,7 @@ public class GameControl{
     }
 
     public JFrame makeDisplay(Cell [][] gameBoard){
+        // creates a display window to show game results instead of using terminal
         JFrame f = new JFrame("Life");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout gameLayout = new GridLayout(gameBoard.length, gameBoard.length);
@@ -63,15 +68,15 @@ public class GameControl{
         gameWindow.getContentPane().removeAll(); // clear current board
         for (int row = 0; row < gameBoard.length; row++){
             for (int col = 0; col < gameBoard[row].length; col++){
-                    Cell thisCell = gameBoard[row][col];
-                    if (thisCell.hasLife()){
-                        gameWindow.add(new CellPanel(true));
-                    } else {
-                        gameWindow.add(new CellPanel());
-                    }
-                    gameWindow.pack();
+                Cell thisCell = gameBoard[row][col];
+                if (thisCell.hasLife()){
+                    gameWindow.add(new CellPanel(true));
+                } else {
+                    gameWindow.add(new CellPanel());
+                }
             }
         }
+        gameWindow.pack();
     }
 
     public void setMaxGenerations(int numGenerations){
@@ -95,6 +100,7 @@ public class GameControl{
     }
 
     public void delayGame(int delayFor){
+        // delay the game for specified number of miliseconds
         try{
             Thread.sleep(delayFor);
         } catch (InterruptedException e) {
@@ -103,6 +109,10 @@ public class GameControl{
     }
 
     public Cell [][] evaluateBoard(Cell [][] currentBoard){
+        /*
+        Evaluate the current game board and determine the state of each cell for next generation
+        */
+
         // make new empty board to store the status of next board
         Cell [][] nextBoard = new Cell [currentBoard.length][currentBoard[0].length];
         

@@ -7,13 +7,13 @@ import java.awt.GridLayout;
 public class Life{
     public static void main(String [] args){
         // game runs for 10 generations with 1 second delay between generations
-        GameControl game = new GameControl(10, 1000);
+        GameControl game = new GameControl(10);
 
         // init game board
-        Cell [][] board = game.makeBoard(10, 10);
+        Cell [][] board = game.makeBoard(20, 20);
         
         // make game window
-        JFrame display = game.makeDisplay(board);       
+        JFrame display = game.makeDisplay(board);
         
         // insert glider at position (2, 2)
         game.insertGlider(board, 2, 2);

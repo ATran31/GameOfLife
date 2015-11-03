@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 class CellPanel extends JPanel {
-    // create border
+    // constructors
     public CellPanel() {
         setBorder(BorderFactory.createLineBorder(Color.yellow));
         setOpaque(true);
