@@ -54,7 +54,7 @@ public class GameControl{
             for (int col = 0; col < gameBoard[row].length; col++){
                     Cell thisCell = gameBoard[row][col];
                     if (thisCell.hasLife()){
-                        gameWindow.add(new CellPanel("live"));
+                        gameWindow.add(new CellPanel(true);
                     } else {
                         gameWindow.add(new CellPanel());
                     }

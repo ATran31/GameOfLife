@@ -10,13 +10,13 @@ class CellPanel extends JPanel {
         setOpaque(true);
         setBackground(Color.black);
     }
-    public CellPanel(String status) {
+    public CellPanel(Boolean hasLife) {
         setBorder(BorderFactory.createLineBorder(Color.yellow));
         setOpaque(true);
-        if (status == "live"){
-            setBackground(Color.red);
+        if (hasLife){
+            setBackground(Color.red); // live cells red
         } else {
-            setBackground(Color.black);
+            setBackground(Color.black); // dead cells black
         }
     }    
     // set cell size

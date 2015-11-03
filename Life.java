@@ -24,6 +24,7 @@ public class Life{
         
         // print game board
         game.printBoard(board, f);
+        game.delayGame(game.getDelay());
 
         int gameIterations = game.getMaxGenerations();
 
