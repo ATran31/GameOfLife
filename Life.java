@@ -13,17 +13,13 @@ public class Life{
         Cell [][] board = game.makeBoard(10, 10);
         
         // make game window
-        JFrame f = new JFrame("Life");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridLayout gameLayout = new GridLayout(board.length, board.length);
-        f.setLayout(gameLayout);
-        f.setVisible(true);       
+        JFrame display = game.makeDisplay(board);       
         
         // insert glider at position (2, 2)
         game.insertGlider(board, 2, 2);
         
         // print game board
-        game.printBoard(board, f);
+        game.printBoard(board, display);
         game.delayGame(game.getDelay());
 
         int gameIterations = game.getMaxGenerations();
@@ -31,7 +27,7 @@ public class Life{
         for(int i = 1; i <= gameIterations; i++){
             System.out.println("Generation: "+i+"/"+gameIterations);
             board = game.evaluateBoard(board);
-            game.printBoard(board, f);
+            game.printBoard(board, display);
             game.delayGame(game.getDelay());
         }
     }

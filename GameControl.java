@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import java.awt.GridLayout;
 
 public class GameControl{
     // default states of any new game
@@ -29,6 +30,16 @@ public class GameControl{
         return board;
     }
 
+    public JFrame makeDisplay(Cell [][] gameBoard){
+        JFrame f = new JFrame("Life");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GridLayout gameLayout = new GridLayout(gameBoard.length, gameBoard.length);
+        f.setLayout(gameLayout);
+        f.pack();
+        f.setVisible(true);
+        return f;
+    }
+
     public void insertGlider(Cell [][] destBoard, int xPos, int yPos){
         // init glider pattern and inserts it into game board at (xPos, yPos)
         String [][] pattern = {{" ", "*", " "}, {" ", " ", "*"}, {"*","*","*"}}; // " " is dead, "*" is living
@@ -54,7 +65,7 @@ public class GameControl{
             for (int col = 0; col < gameBoard[row].length; col++){
                     Cell thisCell = gameBoard[row][col];
                     if (thisCell.hasLife()){
-                        gameWindow.add(new CellPanel(true);
+                        gameWindow.add(new CellPanel(true));
                     } else {
                         gameWindow.add(new CellPanel());
                     }
