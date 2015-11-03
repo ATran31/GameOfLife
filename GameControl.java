@@ -91,7 +91,7 @@ public class GameControl{
         }
     }
 
-    public void evaluateBoard(Cell [][] currentBoard){
+    public Cell [][] evaluateBoard(Cell [][] currentBoard){
         // make new empty board to store the status of next board
         Cell [][] nextBoard = new Cell [currentBoard.length][currentBoard[0].length];
         
@@ -115,8 +115,8 @@ public class GameControl{
                     nextBoard[row][col] = cellNextGen; // insert new cell status into next generation board
             }    
         }
-
         currentBoard = nextBoard; // the contents of the current board will be replaced with the next generation
         nextBoard = null; // delete this instance of the next board
+        return currentBoard;
     }
 } // end GameControl class
