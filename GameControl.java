@@ -115,8 +115,6 @@ public class GameControl{
                     nextBoard[row][col] = cellNextGen; // insert new cell status into next generation board
             }    
         }
-        currentBoard = nextBoard; // the contents of the current board will be replaced with the next generation
-        nextBoard = null; // delete this instance of the next board
-        return currentBoard;
+        return nextBoard;
     }
 } // end GameControl class
