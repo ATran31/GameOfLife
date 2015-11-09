@@ -82,8 +82,6 @@ public class Cell{
         int [] bottomLeft = {rowIndex+1, colIndex-1};
         int [] bottomCenter = {rowIndex+1, colIndex};
         int [] bottomRight = {rowIndex+1, colIndex+1};
-
-        System.out.printf("This position row %d column %d\n", rowIndex, colIndex);
         
         String position = isCornerOrEdge(gameBoard); 
         

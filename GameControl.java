@@ -28,7 +28,7 @@ public class GameControl{
         for (int row = 0; row < board.length; row++){
             for (int col = 0; col < board[row].length; col++){
                 board[row][col] = new Cell();
-                board[row][col].setPosition(col, row); // add cell location as current cell member
+                board[row][col].setPosition(row, col); // add cell location as current cell member
             }
         }
         return board;
@@ -114,27 +114,35 @@ public class GameControl{
         */
 
         // make new empty board to store the status of next board
-        Cell [][] nextBoard = new Cell [currentBoard.length][currentBoard[0].length];
+        Cell [][] nextBoard = new Cell [currentBoard.length][currentBoard.length];
         
         // loop through current board & set life status of every cell
         for (int row = 0; row < currentBoard.length; row++){
             for (int col = 0; col < currentBoard[row].length; col++){
                     Cell cellThisGen = currentBoard[row][col]; // the cell during this generation
-                    Cell cellNextGen = new Cell(); // the cell during next generation
+                    Cell cellNextGen = new Cell(); // the cell during next generation, defaults to dead
+                    cellNextGen.setPosition(row, col);
                     int liveNeighborCount = cellThisGen.countLiveNeighbors(currentBoard);
-                    if (cellThisGen.hasLife()){
-                        if(liveNeighborCount < 2 || liveNeighborCount > 3){
-                            cellNextGen.die();
-                        } else {
-                            cellNextGen.live();
-                        }
-                    }else{
-                        if(liveNeighborCount == 3){
-                            cellNextGen.live();
-                        }
+                    boolean cellAlive = cellThisGen.hasLife();
+                    
+                    if (cellAlive && (liveNeighborCount < 2 || liveNeighborCount > 3)){
+                        cellNextGen.die();
+                        System.out.printf("Cell is living at row %d col %d and has %d live neighbors. It should die.\n\n", row+1, col+1, liveNeighborCount);
+                    } else if (cellAlive){
+                        cellNextGen.live();
+                        System.out.printf("Cell is living at row %d col %d and has %d live neighbors. It should live.\n\n", row+1, col+1, liveNeighborCount);
                     }
+
+                    if (!cellAlive && liveNeighborCount == 3) {
+                        cellNextGen.live();
+                        System.out.printf("Cell is dead at row %d col %d and has %d live neighbors. It should live.\n\n", row+1, col+1, liveNeighborCount);
+                    } else if (!cellAlive && liveNeighborCount != 3) {
+                        cellNextGen.die();
+                        System.out.printf("Cell is dead at row %d col %d and has %d live neighbors. It should stay dead.\n\n", row+1, col+1, liveNeighborCount);
+                    }
+
                     nextBoard[row][col] = cellNextGen; // insert new cell status into next generation board
-            }    
+            }
         }
         return nextBoard;
     }
