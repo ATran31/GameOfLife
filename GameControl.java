@@ -10,12 +10,12 @@ public class GameControl{
     public GameControl(){}
 
     public GameControl(int numGenerations){
-        generations = numGenerations;
+        this.generations = numGenerations;
     }
 
     public GameControl(int numGenerations, int newDelay){
-        generations = numGenerations;
-        delayTime = newDelay;
+        this.generations = numGenerations;
+        this.delayTime = newDelay;
     }
 
     // methods
@@ -28,7 +28,7 @@ public class GameControl{
         for (int row = 0; row < board.length; row++){
             for (int col = 0; col < board[row].length; col++){
                 board[row][col] = new Cell();
-                board[row][col].setPosition(col, row);
+                board[row][col].setPosition(col, row); // add cell location as current cell member
             }
         }
         return board;
@@ -81,22 +81,22 @@ public class GameControl{
 
     public void setMaxGenerations(int numGenerations){
         // set the max number of generations to run the game
-        generations = numGenerations;
+        this.generations = numGenerations;
     }
 
     public int getMaxGenerations(){
         // returns the number of max generations in game instance
-        return generations;
+        return this.generations;
     }
 
     public void setDelay(int newDelay){
         // set the delay between each generation in miliseconds
-        delayTime = newDelay;
+        this.delayTime = newDelay;
     }
 
     public int getDelay(){
         // get the delay between generations in miliseconds
-        return delayTime;
+        return this.delayTime;
     }
 
     public void delayGame(int delayFor){
@@ -121,7 +121,7 @@ public class GameControl{
             for (int col = 0; col < currentBoard[row].length; col++){
                     Cell cellThisGen = currentBoard[row][col]; // the cell during this generation
                     Cell cellNextGen = new Cell(); // the cell during next generation
-                    int liveNeighborCount = cellThisGen.countLiveNeighbors();
+                    int liveNeighborCount = cellThisGen.countLiveNeighbors(currentBoard);
                     if (cellThisGen.hasLife()){
                         if(liveNeighborCount < 2 || liveNeighborCount > 3){
                             cellNextGen.die();
