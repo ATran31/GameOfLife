@@ -7,17 +7,17 @@ public class Cell{
     public Cell(){}
 
     public Cell(boolean living){
-        isAlive = living;
+        this.isAlive = living;
     }
     // methods
     public void live(){
         // sets current cell to live
-        isAlive = true;
+        this.isAlive = true;
     }
 
     public void die(){
         // sets current cell to dead
-        isAlive = false;
+        this.isAlive = false;
     }
 
     public int [] getPosition(){
@@ -25,12 +25,12 @@ public class Cell{
     }
 
     public void setPosition(int rowPos, int colPos){
-        position[0] = rowPos;
-        position[1] = colPos;
+        this.position[0] = rowPos;
+        this.position[1] = colPos;
     }
 
     public boolean hasLife(){
-        return isAlive;
+        return this.isAlive;
     }
 
     // classify position
@@ -44,14 +44,14 @@ public class Cell{
         if (sumPos == 0){
             str = "Corner-TL";
         }
-        else if (sumPos == boardSize && rowIndex == 0){
+        else if (rowIndex == 0 && colIndex == boardSize){
             str = "Corner-TR";
         }
-        else if (sumPos == boardSize && colIndex == 0){
+        else if (rowIndex == boardSize && colIndex == 0){
             str = "Corner-BL";
         }
         else if (sumPos == boardSize*2){
-            str = "Corner-BL";
+            str = "Corner-BR";
         }
         else if (rowIndex == 0){
             str = "Edge-Top";
@@ -82,6 +82,8 @@ public class Cell{
         int [] bottomLeft = {rowIndex+1, colIndex-1};
         int [] bottomCenter = {rowIndex+1, colIndex};
         int [] bottomRight = {rowIndex+1, colIndex+1};
+
+        System.out.printf("This position row %d column %d\n", rowIndex, colIndex);
         
         String position = isCornerOrEdge(gameBoard); 
         
