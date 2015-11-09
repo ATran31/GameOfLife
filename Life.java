@@ -12,21 +12,22 @@ public class Life{
         // init game board
         Cell [][] board = game.makeBoard(20, 20);
         
-        // make game window
+        // make display window
         JFrame display = game.makeDisplay(board);
         
         // insert glider at position (2, 2)
         game.insertGlider(board, 2, 2);
         
-        // print game board
+        // print generation 0
         game.printBoard(board, display);
         game.delayGame(game.getDelay());
 
         int gameIterations = game.getMaxGenerations();
 
+        // iterate through every generation
         for(int i = 1; i <= gameIterations; i++){
             System.out.println("Generation: "+i+"/"+gameIterations);
-            board = game.evaluateBoard(board);
+            board = game.evaluateBoard(board); // current board takes on new values for next generation
             game.printBoard(board, display);
             game.delayGame(game.getDelay());
         }
