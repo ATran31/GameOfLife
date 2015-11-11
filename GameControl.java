@@ -3,27 +3,26 @@ import java.awt.GridLayout;
 
 public class GameControl{
     // default states of any new game
-    private int generations = 1;
-    private int delayTime = 1000; // default delay is 1 second
+    private int worldSize = 0;
+    private int generations = 0;
+    private int delayTime = 0; // default delay is 0 second
+    private boolean configStatus = false;
 
     // constructors
     public GameControl(){}
 
-    public GameControl(int numGenerations){
+    public GameControl(int newSize, int numGenerations, int newDelay){
         this.generations = numGenerations;
-    }
-
-    public GameControl(int numGenerations, int newDelay){
-        this.generations = numGenerations;
+        this.worldSize = newSize;
         this.delayTime = newDelay;
     }
 
     // methods
-    public Cell [][] makeBoard(int boardWidth, int boardHeight){
+    public Cell [][] makeBoard(){
         /*
         inititializes the gameboard and sets the entire board to blank
         */
-        Cell [][] board = new Cell[boardWidth][boardHeight];
+        Cell [][] board = new Cell[this.worldSize][this.worldSize];
 
         for (int row = 0; row < board.length; row++){
             for (int col = 0; col < board[row].length; col++){
@@ -34,12 +33,13 @@ public class GameControl{
         return board;
     }
 
-    public JFrame makeDisplay(Cell [][] gameBoard){
+    public JFrame makeDisplay(){
         // creates a display window to show game results instead of using terminal
         JFrame f = new JFrame("Life");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridLayout gameLayout = new GridLayout(gameBoard.length, gameBoard.length);
+        GridLayout gameLayout = new GridLayout(this.worldSize, this.worldSize);
         f.setLayout(gameLayout);
+        f.setLocationRelativeTo(null);
         f.pack();
         f.setVisible(true);
         return f;
@@ -79,6 +79,14 @@ public class GameControl{
         gameWindow.pack();
     }
 
+    public void setWorldSize(int newWorldSize){
+        this.worldSize = newWorldSize;
+    }
+
+    public int getWorldSize(){
+        return this.worldSize;
+    }
+
     public void setMaxGenerations(int numGenerations){
         // set the max number of generations to run the game
         this.generations = numGenerations;
@@ -108,6 +116,14 @@ public class GameControl{
         }
     }
 
+    public boolean getConfigStatus(){
+        return this.configStatus;
+    }
+
+    public void setConfigStatus(boolean newStatus){
+        this.configStatus = newStatus;
+    }
+
     public Cell [][] evaluateBoard(Cell [][] currentBoard){
         /*
         Evaluate the current game board and determine the state of each cell for next generation
@@ -127,18 +143,14 @@ public class GameControl{
                     
                     if (cellAlive && (liveNeighborCount < 2 || liveNeighborCount > 3)){
                         cellNextGen.die();
-                        System.out.printf("Cell is living at row %d col %d and has %d live neighbors. It should die.\n\n", row+1, col+1, liveNeighborCount);
                     } else if (cellAlive){
                         cellNextGen.live();
-                        System.out.printf("Cell is living at row %d col %d and has %d live neighbors. It should live.\n\n", row+1, col+1, liveNeighborCount);
                     }
 
                     if (!cellAlive && liveNeighborCount == 3) {
                         cellNextGen.live();
-                        System.out.printf("Cell is dead at row %d col %d and has %d live neighbors. It should live.\n\n", row+1, col+1, liveNeighborCount);
                     } else if (!cellAlive && liveNeighborCount != 3) {
                         cellNextGen.die();
-                        System.out.printf("Cell is dead at row %d col %d and has %d live neighbors. It should stay dead.\n\n", row+1, col+1, liveNeighborCount);
                     }
 
                     nextBoard[row][col] = cellNextGen; // insert new cell status into next generation board
