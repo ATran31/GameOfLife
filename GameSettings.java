@@ -43,7 +43,7 @@ public class GameSettings extends JFrame{
                 controller.setMaxGenerations(defaultSettings[1]);
                 controller.setDelay(defaultSettings[2]);
                 controller.setConfigStatus(true);
-                GameSettings.this.dispose();
+                GameSettings.this.dispose(); // get rid of the Game Settings window after the user clicks BANG
             }
         });
         
