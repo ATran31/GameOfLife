@@ -5,31 +5,30 @@ import javax.swing.JFrame;
 
 public class Life{
     public static void main(String [] args){
-        // initiate a new GameControl instance
+        // initiate a new game control instance
         GameControl game = new GameControl();
 
-        // set new game settings. All new instances of GameControl are unconfigured
-        GameConfig config = new GameConfig(game);
+        GameSettings config = new GameSettings(game);
 
-        // continuously check for new configuration settings if GameControl is unconfigured
-        while (!game.getConfigStatus()){
+        // delay the game until game configuration status == true
+        while(!game.getConfigStatus()){
             game.delayGame(1);
         }
 
-        // run program when GameControl is configured
+        // run program when game is configured
         if (game.getConfigStatus()) {
 
             // init game board
-            Cell [][] board = game.makeBoard();
+            game.makeBoard();
             
             // make display window
             JFrame display = game.makeDisplay();
             
-            // insert glider at position (1, 1)
-            game.insertGlider(board, 1, 1);
+            // insert glider at position (x, y)
+            game.insertGlider(1, 1);
             
             // print generation 0
-            game.printBoard(board, display);
+            game.printBoard(display);
             game.delayGame(game.getDelay());
 
             int gameIterations = game.getMaxGenerations();
@@ -37,10 +36,11 @@ public class Life{
             // iterate through every generation
             for(int i = 0; i < gameIterations; i++){
                 System.out.println("Evaluating Generation: "+i);
-                board = game.evaluateBoard(board); // current board takes on new values for next generation
-                game.printBoard(board, display);
+                game.evaluateBoard(); // current board takes on new values for next generation
+                game.printBoard(display);
                 game.delayGame(game.getDelay());
             }
         }
+        System.out.println(game.getConfigStatus());
     }
 }

@@ -1,3 +1,8 @@
+/*
+* Handles state and behavior of cell objects in the gameboard
+* Gets/Sets status of each cell and retrieves the number living neighbors
+*/
+
 public class Cell{
     //default state of any new cell
     private boolean isAlive = false;
@@ -9,6 +14,7 @@ public class Cell{
     public Cell(boolean living){
         this.isAlive = living;
     }
+    
     // methods
     public void live(){
         // sets current cell to live
@@ -33,8 +39,8 @@ public class Cell{
         return this.isAlive;
     }
 
-    // classify position
     private String isCornerOrEdge(Cell [][] gameBoard){
+        // checks if current position is a corner or edge
         int boardSize = gameBoard.length-1;
         String str = "";
         int rowIndex = this.position[0];
