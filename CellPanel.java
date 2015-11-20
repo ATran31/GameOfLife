@@ -1,3 +1,8 @@
+/*
+* Handles visual representation of each dead or living  cell on the GUI display board
+* Child of JPanel
+*/
+
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import java.awt.Color;
