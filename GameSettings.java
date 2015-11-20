@@ -18,7 +18,7 @@ public class GameSettings extends JFrame{
     public GameSettings(final GameControl controller){
         // setup the GUI layout
         setTitle("Game Settings");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         FlowLayout settingsLayout = new FlowLayout(FlowLayout.TRAILING);
         setLayout(settingsLayout);
         for (int i = 0; i < gameOptions.length; i++){
@@ -37,8 +37,6 @@ public class GameSettings extends JFrame{
                 for (int i = 0; i < gameOptions.length; i++){
                     defaultSettings[i] = Integer.parseInt(fieldList[i].getText());
                 }
-                System.out.printf("%d, %d, %d", defaultSettings[0], defaultSettings[1], defaultSettings[2]);
-                
                 controller.setWorldSize(defaultSettings[0]);
                 controller.setMaxGenerations(defaultSettings[1]);
                 controller.setDelay(defaultSettings[2]);
