@@ -41,6 +41,5 @@ public class Life{
                 game.delayGame(game.getDelay());
             }
         }
-        System.out.println(game.getConfigStatus());
     }
 }
