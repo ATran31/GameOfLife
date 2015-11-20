@@ -1,3 +1,7 @@
+/*
+* Initializes and runs the game.
+* Handles all outputs of the game to the output display window and/or terminal.
+*/
 import javax.swing.JFrame;
 import java.awt.GridLayout;
 
@@ -5,8 +9,9 @@ public class GameControl{
     // default states of any new game
     private int worldSize = 0;
     private int generations = 0;
-    private int delayTime = 0; // default delay is 0 second
+    private int delayTime = 0;
     private boolean configStatus = false;
+    private Cell [][] board;
 
     // constructors
     public GameControl(){}
@@ -18,11 +23,11 @@ public class GameControl{
     }
 
     // methods
-    public Cell [][] makeBoard(){
+    public void makeBoard(){
         /*
         inititializes the gameboard and sets the entire board to blank
         */
-        Cell [][] board = new Cell[this.worldSize][this.worldSize];
+        board = new Cell[this.worldSize][this.worldSize];
 
         for (int row = 0; row < board.length; row++){
             for (int col = 0; col < board[row].length; col++){
@@ -30,7 +35,6 @@ public class GameControl{
                 board[row][col].setPosition(row, col); // add cell location as current cell member
             }
         }
-        return board;
     }
 
     public JFrame makeDisplay(){
@@ -39,36 +43,38 @@ public class GameControl{
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout gameLayout = new GridLayout(this.worldSize, this.worldSize);
         f.setLayout(gameLayout);
-        f.setLocationRelativeTo(null);
         f.pack();
         f.setVisible(true);
         return f;
     }
 
-    public void insertGlider(Cell [][] destBoard, int xPos, int yPos){
-        // init glider pattern and inserts it into game board at (xPos, yPos)
-        String [][] pattern = {{" ", "*", " "}, {" ", " ", "*"}, {"*","*","*"}}; // " " is dead, "*" is living
+    public void insertGlider(int xPos, int yPos){
+        // make new glider object and insert it into the game board
+        Glider thisGlider = new Glider();
+        String [][] pattern = thisGlider.getPattern();
 
+        // set insert positions
         int xIndex = xPos-1;
         int yIndex = yPos-1;
 
+        // loop through pattern and insert * positions into main game board
         for (int row = 0; row < pattern.length; row++){
             for (int col = 0; col < pattern[row].length; col++){
                 String currentVal = pattern[row][col];
                 if (currentVal == "*"){
-                    Cell thisCell = destBoard[xIndex+row][yIndex+col];
+                    Cell thisCell = board[xIndex+row][yIndex+col];
                     thisCell.live();
                 }
             }
         }
     }
 
-    public void printBoard(Cell [][] gameBoard, JFrame gameWindow){
+    public void printBoard(JFrame gameWindow){
         // prints the entire gameboard for a single generation
         gameWindow.getContentPane().removeAll(); // clear current board
-        for (int row = 0; row < gameBoard.length; row++){
-            for (int col = 0; col < gameBoard[row].length; col++){
-                Cell thisCell = gameBoard[row][col];
+        for (int row = 0; row < board.length; row++){
+            for (int col = 0; col < board[row].length; col++){
+                Cell thisCell = board[row][col];
                 if (thisCell.hasLife()){
                     gameWindow.add(new CellPanel(true));
                 } else {
@@ -80,10 +86,12 @@ public class GameControl{
     }
 
     public void setWorldSize(int newWorldSize){
+        // sets the size of the game world
         this.worldSize = newWorldSize;
     }
 
     public int getWorldSize(){
+        // get the size of the world
         return this.worldSize;
     }
 
@@ -121,24 +129,23 @@ public class GameControl{
     }
 
     public void setConfigStatus(boolean newStatus){
+        // set whether the game control has been configured
         this.configStatus = newStatus;
     }
 
-    public Cell [][] evaluateBoard(Cell [][] currentBoard){
-        /*
-        Evaluate the current game board and determine the state of each cell for next generation
-        */
-
+    public void evaluateBoard(){
+        //Evaluate the current game board and determine the state of each cell for next generation
         // make new empty board to store the status of next board
-        Cell [][] nextBoard = new Cell [currentBoard.length][currentBoard.length];
+
+        Cell [][] nextBoard = new Cell [board.length][board.length];
         
         // loop through current board & set life status of every cell
-        for (int row = 0; row < currentBoard.length; row++){
-            for (int col = 0; col < currentBoard[row].length; col++){
-                    Cell cellThisGen = currentBoard[row][col]; // the cell during this generation
+        for (int row = 0; row < board.length; row++){
+            for (int col = 0; col < board[row].length; col++){
+                    Cell cellThisGen = board[row][col]; // the cell during this generation
                     Cell cellNextGen = new Cell(); // the cell during next generation, defaults to dead
                     cellNextGen.setPosition(row, col);
-                    int liveNeighborCount = cellThisGen.countLiveNeighbors(currentBoard);
+                    int liveNeighborCount = cellThisGen.countLiveNeighbors(board);
                     boolean cellAlive = cellThisGen.hasLife();
                     
                     if (cellAlive && (liveNeighborCount < 2 || liveNeighborCount > 3)){
@@ -156,6 +163,6 @@ public class GameControl{
                     nextBoard[row][col] = cellNextGen; // insert new cell status into next generation board
             }
         }
-        return nextBoard;
+        board = nextBoard;
     }
 } // end GameControl class
