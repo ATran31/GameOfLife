@@ -35,11 +35,12 @@ public class Life{
 
             // iterate through every generation
             for(int i = 0; i < gameIterations; i++){
-                System.out.println("Evaluating Generation: "+i);
+                display.setTitle("Life - Evaluating Generation: "+i);
                 game.evaluateBoard(); // current board takes on new values for next generation
                 game.printBoard(display);
                 game.delayGame(game.getDelay());
             }
+            display.setTitle("Life - Game Complete "+gameIterations+" Generations Evaluated");
         }
     }
 }
