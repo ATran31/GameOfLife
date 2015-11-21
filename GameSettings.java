@@ -3,7 +3,6 @@
 * Creates the main user input window and attaches an event listener to the "BANG!" button.
 */
 
-import javax.swing.JFrame;
 import java.awt.FlowLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,14 +33,22 @@ public class GameSettings extends JFrame{
         // attach necessary event listeners
         runBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                for (int i = 0; i < gameOptions.length; i++){
-                    defaultSettings[i] = Integer.parseInt(fieldList[i].getText());
+                try {
+                    
+                    for (int i = 0; i < gameOptions.length; i++){
+                        defaultSettings[i] = Integer.parseInt(fieldList[i].getText());
+                    }
+
+                    controller.setWorldSize(defaultSettings[0]);
+                    controller.setMaxGenerations(defaultSettings[1]);
+                    controller.setDelay(defaultSettings[2]);
+                    controller.setConfigStatus(true);
+                    GameSettings.this.dispose(); // get rid of the Game Settings window after the user clicks BANG
+
+                } catch (NumberFormatException numFormatException) {
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, numFormatException.getMessage()+"\nEnter integer values only!", "Number Format Exception", JOptionPane.ERROR_MESSAGE);
                 }
-                controller.setWorldSize(defaultSettings[0]);
-                controller.setMaxGenerations(defaultSettings[1]);
-                controller.setDelay(defaultSettings[2]);
-                controller.setConfigStatus(true);
-                GameSettings.this.dispose(); // get rid of the Game Settings window after the user clicks BANG
             }
         });
         
