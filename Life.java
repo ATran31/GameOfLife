@@ -1,11 +1,11 @@
 /*
-The main game
+The main game driver.
 */
 import javax.swing.JFrame;
 
 public class Life{
     public static void main(String [] args){
-        // initiate a new game control instance
+        // initiate a new game control  and game settings instance
         GameControl game = new GameControl();
 
         GameSettings config = new GameSettings(game);

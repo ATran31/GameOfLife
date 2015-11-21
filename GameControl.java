@@ -1,5 +1,5 @@
 /*
-* Initializes and runs the game.
+* Initializes and controls the game..
 * Handles all outputs of the game to the output display window and/or terminal.
 */
 import javax.swing.JFrame;
