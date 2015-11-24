@@ -57,9 +57,7 @@ public class GameControl{
         // set insert positions
         Random rNum = new Random();
         int xIndex = rNum.nextInt(worldSize/2);
-        System.out.println(xIndex);
         int yIndex = rNum.nextInt(worldSize/2);
-        System.out.println(yIndex);
 
         // loop through pattern and insert * positions into main game board
         for (int row = 0; row < pattern.length; row++){
