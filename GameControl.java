@@ -4,6 +4,7 @@
 */
 import javax.swing.JFrame;
 import java.awt.GridLayout;
+import java.util.Random;
 
 public class GameControl{
     // default states of any new game
@@ -48,14 +49,17 @@ public class GameControl{
         return f;
     }
 
-    public void insertGlider(int xPos, int yPos){
+    public void insertGlider(){
         // make new glider object and insert it into the game board
         Glider thisGlider = new Glider();
         String [][] pattern = thisGlider.getPattern();
 
         // set insert positions
-        int xIndex = xPos-1;
-        int yIndex = yPos-1;
+        Random rNum = new Random();
+        int xIndex = rNum.nextInt(worldSize/2);
+        System.out.println(xIndex);
+        int yIndex = rNum.nextInt(worldSize/2);
+        System.out.println(yIndex);
 
         // loop through pattern and insert * positions into main game board
         for (int row = 0; row < pattern.length; row++){
