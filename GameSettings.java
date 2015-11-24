@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 
 public class GameSettings extends JFrame{
 
-    final String [] gameOptions = {"World Size: ", "Generations: ", "Speed: "};
-    final int [] defaultSettings = {25, 100, 1000};
-    final JTextField [] fieldList = new JTextField[gameOptions.length];
-    OutOfRangeException worldTooSmall = new OutOfRangeException("Input value out of range.");
+    private final String [] GAME_OPTIONS = {"World Size: ", "Generations: ", "Speed: "};
+    private final int [] DEFAULT_SETTINGS = {25, 100, 1000};
+    private final JTextField [] FIELD_LIST = new JTextField[GAME_OPTIONS.length];
+    private OutOfRangeException worldTooSmall = new OutOfRangeException("Input value out of range.");
 
     public GameSettings(final GameControl controller){
         // setup the GUI layout
@@ -21,12 +21,12 @@ public class GameSettings extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         FlowLayout settingsLayout = new FlowLayout(FlowLayout.TRAILING);
         setLayout(settingsLayout);
-        for (int i = 0; i < gameOptions.length; i++){
-            JLabel label = new JLabel(gameOptions[i], JLabel.RIGHT);
+        for (int i = 0; i < GAME_OPTIONS.length; i++){
+            JLabel label = new JLabel(GAME_OPTIONS[i], JLabel.RIGHT);
             add(label);
-            fieldList[i] = new JTextField(String.valueOf(defaultSettings[i]), 10);
-            label.setLabelFor(fieldList[i]);
-            add(fieldList[i]);
+            FIELD_LIST[i] = new JTextField(String.valueOf(DEFAULT_SETTINGS[i]), 10);
+            label.setLabelFor(FIELD_LIST[i]);
+            add(FIELD_LIST[i]);
         }
         JButton runBtn = new JButton("BANG!");
         runBtn.setToolTipText("Click to initiate the game.");
@@ -36,18 +36,18 @@ public class GameSettings extends JFrame{
             public void actionPerformed(ActionEvent e){
                 try {
                     
-                    for (int i = 0; i < gameOptions.length; i++){
-                        defaultSettings[i] = Integer.parseInt(fieldList[i].getText());
+                    for (int i = 0; i < GAME_OPTIONS.length; i++){
+                        DEFAULT_SETTINGS[i] = Integer.parseInt(FIELD_LIST[i].getText());
                     }
 
                     // throw exeption if world smaller than 3
-                    if (defaultSettings[0] < 3){
+                    if (DEFAULT_SETTINGS[0] < 3){
                         throw worldTooSmall;
                     }
 
-                    controller.setWorldSize(defaultSettings[0]);
-                    controller.setMaxGenerations(defaultSettings[1]);
-                    controller.setDelay(defaultSettings[2]);
+                    controller.setWorldSize(DEFAULT_SETTINGS[0]);
+                    controller.setMaxGenerations(DEFAULT_SETTINGS[1]);
+                    controller.setDelay(DEFAULT_SETTINGS[2]);
                     controller.setConfigStatus(true);
                     GameSettings.this.dispose(); // get rid of the Game Settings window after the user clicks BANG
 
