@@ -24,8 +24,8 @@ public class Life{
             // make display window
             JFrame display = game.makeDisplay();
             
-            // insert glider at position (x, y)
-            game.insertGlider(1, 1);
+            // insert glider
+            game.insertGlider();
             
             // print generation 0
             game.printBoard(display);
@@ -36,7 +36,7 @@ public class Life{
             // iterate through every generation
             for(int i = 0; i < gameIterations; i++){
                 display.setTitle("Life - Evaluating Generation: "+i);
-                game.evaluateBoard(); // current board takes on new values for next generation
+                game.evaluateBoard();
                 game.printBoard(display);
                 game.delayGame(game.getDelay());
             }
