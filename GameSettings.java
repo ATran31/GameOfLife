@@ -1,5 +1,5 @@
 /*
-* Handles user input and retrieving game configuration settings.
+* Handles user input and configures game.
 * Creates the main user input window and attaches an event listener to the "BANG!" button.
 */
 

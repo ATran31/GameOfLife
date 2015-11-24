@@ -27,15 +27,18 @@ public class Cell{
     }
 
     public int [] getPosition(){
+        // get this cell's position the game board
         return position;
     }
 
     public void setPosition(int rowPos, int colPos){
+        // set the position value of this cell's row and column
         this.position[0] = rowPos;
         this.position[1] = colPos;
     }
 
     public boolean hasLife(){
+        // checks if this cell is alive
         return this.isAlive;
     }
 
@@ -74,8 +77,8 @@ public class Cell{
         return str;
     }
 
-    // count live neighbors
     public int countLiveNeighbors(Cell [][] gameBoard){
+        // count live neighbors around this cell
         int counter = 0;
         int rowIndex = this.position[0];
         int colIndex = this.position[1];
@@ -172,7 +175,7 @@ public class Cell{
             }
         }
         else {
-            // default
+            // default case
             int [][] searchPattern = {topLeft, topCenter, topRight, left, right, bottomLeft, bottomCenter, bottomRight};
             for (int [] place : searchPattern){
                 int cRow = place[0];
