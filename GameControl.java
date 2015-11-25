@@ -1,6 +1,8 @@
 /*
-* Initializes and controls the game..
-* Handles all outputs of the game to the output display window and/or terminal.
+GameControl.java
+
+Initializes and controls the game..
+Handles all outputs of the game to the output display window and/or terminal.
 */
 import javax.swing.JFrame;
 import java.awt.GridLayout;
@@ -169,6 +171,8 @@ public class GameControl{
     }
 
     public void run(){
+        // initiate the game
+
         // delay the game until game configuration status == true
         while(!getConfigStatus()){
             delayGame(1);
@@ -193,7 +197,7 @@ public class GameControl{
             int gameIterations = getMaxGenerations();
 
             // iterate through every generation
-            for(int i = 0; i < gameIterations; i++){
+            for(int i = 0; i <= gameIterations; i++){
                 display.setTitle("Life - Evaluating Generation: "+i);
                 evaluateBoard();
                 printBoard();

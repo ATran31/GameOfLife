@@ -1,5 +1,7 @@
 /*
-* Handles the creation and naming of new pattern objects
+Pattern.java
+
+Handles the creation and naming of new pattern objects
 */
 
 public class Pattern {

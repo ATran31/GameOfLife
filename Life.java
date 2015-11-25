@@ -1,14 +1,15 @@
 /*
+Life.java
+
 The main game driver.
 */
-import javax.swing.JFrame;
 
 public class Life{
     public static void main(String [] args){
-        // initiate game
+        // initiate new control
         GameControl game = new GameControl();
 
-        // configure game settings
+        // configure settings
         GameSettings config = new GameSettings(game);
 
         // run game

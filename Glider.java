@@ -1,6 +1,8 @@
 /*
-* Handles creation of glider objects
-* Child of Pattern
+Glider.java
+
+Handles creation of glider objects
+Child of Pattern
 */
 
 public class Glider extends Pattern {

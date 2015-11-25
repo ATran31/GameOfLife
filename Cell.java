@@ -1,6 +1,8 @@
 /*
-* Handles state and behavior of cell objects in the gameboard
-* Gets/Sets status of each cell and retrieves the number living neighbors
+Cell.java
+
+Handles state and behavior of cell objects in the gameboard
+Gets/Sets status of each cell and retrieves the number living neighbors
 */
 
 public class Cell{

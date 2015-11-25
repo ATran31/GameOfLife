@@ -1,6 +1,8 @@
 /*
-* Handles user input and configures game.
-* Creates the main user input window and attaches an event listener to the "BANG!" button.
+GameSettings.java
+
+Handles user input and configures game.
+Creates the main user input window and attaches an event listener to the "BANG!" button.
 */
 
 import java.awt.FlowLayout;
