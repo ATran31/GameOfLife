@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class GameSettings extends JFrame{
 
     private final String [] GAME_OPTIONS = {"World Size: ", "Generations: ", "Speed: "};
-    private final int [] DEFAULT_SETTINGS = {25, 100, 1000};
+    private final int [] DEFAULT_SETTINGS = {25, 60, 1000};
     private final JTextField [] FIELD_LIST = new JTextField[GAME_OPTIONS.length];
     private OutOfRangeException worldTooSmall = new OutOfRangeException("Input value out of range.");
 
