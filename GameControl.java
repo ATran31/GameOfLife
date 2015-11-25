@@ -47,6 +47,7 @@ public class GameControl{
         display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout gameLayout = new GridLayout(this.worldSize, this.worldSize);
         display.setLayout(gameLayout);
+        display.setResizable(false);
         display.pack();
         display.setVisible(true);
         display.setLocationRelativeTo(null);
