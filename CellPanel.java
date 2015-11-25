@@ -15,7 +15,7 @@ class CellPanel extends JPanel {
         setOpaque(true);
         setBackground(Color.black);
     }
-    public CellPanel(Boolean hasLife) {
+    public CellPanel(boolean hasLife) {
         setBorder(BorderFactory.createLineBorder(Color.yellow));
         setOpaque(true);
         if (hasLife){
