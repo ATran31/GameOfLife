@@ -13,6 +13,7 @@ public class GameControl{
     private int delayTime = 0;
     private boolean configStatus = false;
     private Cell [][] board;
+    private JFrame display;
 
     // constructors
     public GameControl(){}
@@ -38,15 +39,14 @@ public class GameControl{
         }
     }
 
-    public JFrame makeDisplay(){
+    public void makeDisplay(){
         // creates a display window to show game results instead of using terminal
-        JFrame f = new JFrame("Life");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        display = new JFrame("Life");
+        display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout gameLayout = new GridLayout(this.worldSize, this.worldSize);
-        f.setLayout(gameLayout);
-        f.pack();
-        f.setVisible(true);
-        return f;
+        display.setLayout(gameLayout);
+        display.pack();
+        display.setVisible(true);
     }
 
     public void insertGlider(){
@@ -71,20 +71,20 @@ public class GameControl{
         }
     }
 
-    public void printBoard(JFrame gameWindow){
+    public void printBoard(){
         // prints the entire gameboard for a single generation
-        gameWindow.getContentPane().removeAll(); // clear current board
+        display.getContentPane().removeAll(); // clear current board
         for (int row = 0; row < board.length; row++){
             for (int col = 0; col < board[row].length; col++){
                 Cell thisCell = board[row][col];
                 if (thisCell.hasLife()){
-                    gameWindow.add(new CellPanel(true));
+                    display.add(new CellPanel(true));
                 } else {
-                    gameWindow.add(new CellPanel());
+                    display.add(new CellPanel());
                 }
             }
         }
-        gameWindow.pack();
+        display.pack();
     }
 
     public void setWorldSize(int newWorldSize){
@@ -166,5 +166,40 @@ public class GameControl{
             }
         }
         board = nextBoard;
+    }
+
+    public void run(){
+        // delay the game until game configuration status == true
+        while(!getConfigStatus()){
+            delayGame(1);
+        }
+
+        // run program when game is configured
+        if (getConfigStatus()) {
+
+            // init game board
+            makeBoard();
+            
+            // make display window
+            makeDisplay();
+            
+            // insert glider
+            insertGlider();
+            
+            // print generation 0
+            printBoard();
+            delayGame(getDelay());
+
+            int gameIterations = getMaxGenerations();
+
+            // iterate through every generation
+            for(int i = 0; i < gameIterations; i++){
+                display.setTitle("Life - Evaluating Generation: "+i);
+                evaluateBoard();
+                printBoard();
+                delayGame(getDelay());
+            }
+            display.setTitle("Life - Game Complete "+gameIterations+" Generations Evaluated");
+        }        
     }
 } // end GameControl class
