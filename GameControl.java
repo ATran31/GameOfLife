@@ -26,7 +26,6 @@ public class GameControl{
         this.delayTime = newDelay;
     }
 
-    // methods
     public void makeBoard(){
         /*
         inititializes the gameboard and sets the entire board to blank
@@ -58,7 +57,7 @@ public class GameControl{
         Glider thisGlider = new Glider();
         String [][] pattern = thisGlider.getPattern();
 
-        // set insert positions
+        // set insert at random positions
         Random rNum = new Random();
         int xIndex = rNum.nextInt(worldSize/2);
         int yIndex = rNum.nextInt(worldSize/2);
@@ -131,6 +130,7 @@ public class GameControl{
     }
 
     public boolean getConfigStatus(){
+        // get the configuration status of the game
         return this.configStatus;
     }
 

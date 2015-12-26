@@ -17,7 +17,6 @@ public class Cell{
         this.isAlive = living;
     }
     
-    // methods
     public void live(){
         // sets current cell to live
         this.isAlive = true;
