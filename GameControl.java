@@ -49,8 +49,8 @@ public class GameControl{
         display.setLayout(gameLayout);
         display.setResizable(false);
         display.pack();
-        display.setVisible(true);
         display.setLocationRelativeTo(null);
+        display.setVisible(true);
     }
 
     public void insertGlider(){
