@@ -14,11 +14,9 @@
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
-*.mf
 
 # Logs and databases #
 ######################
@@ -35,9 +33,3 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# sublime files #
-#################
-
-*.sublime-project
-*.sublime-workspace
